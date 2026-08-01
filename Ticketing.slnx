@@ -9,6 +9,10 @@
     <Project Path="src/Ticketing.Infrastructure/Ticketing.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/Frontend/">
+    <Project Path="src/Ticketing.Client.Angular/Ticketing.Client.Angular.esproj">
+      <Build />
+      <Deploy />
+    </Project>
     <Project Path="src/Ticketing.Client.Server/Ticketing.Client.Server.csproj" />
     <Project Path="src/Ticketing.Client.Wasm/Ticketing.Client.Wasm.csproj" />
   </Folder>
