@@ -8,7 +8,7 @@ using Ticketing.Application.Abstractions;
 using Ticketing.Domain.Entities;
 using Ticketing.Shared.Contracts.Tickets;
 
-[Authorize]
+//[Authorize]
 [Route("api/tickets")]
 [ApiController]
 public class TicketsController : ControllerBase

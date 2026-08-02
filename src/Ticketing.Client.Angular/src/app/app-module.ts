@@ -3,18 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app.component';
+import { TicketList } from './features/tickets/pages/ticket-list/ticket-list';
+import { Dashboard } from './features/dashboard/pages/dashboard/dashboard';
+import { Navbar } from './shared/components/navbar/navbar';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, TicketList, Dashboard, Navbar],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideHttpClient()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

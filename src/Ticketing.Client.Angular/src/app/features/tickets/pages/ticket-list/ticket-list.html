@@ -1,0 +1,10 @@
+<p>Nombre de tickets : {{ tickets().length }}</p>
+
+@for (ticket of tickets(); track ticket.id) {
+<div>
+  <h3>{{ ticket.title }}</h3>
+  <p>Statut : {{ ticket.statut }}</p>
+  <p>Créé le : {{ ticket.createdAtUtc }}</p>
+  <hr>
+</div>
+}

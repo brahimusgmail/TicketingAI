@@ -127,30 +127,43 @@ builder.Services.AddCors(options =>
     });
 });
 
+const string AngularCorsPolicy = "AngularClient";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(AngularCorsPolicy, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:58654")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var initializer = scope.ServiceProvider
-        .GetRequiredService<QdrantCollectionInitializer>();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var initializer = scope.ServiceProvider
+//        .GetRequiredService<QdrantCollectionInitializer>();
 
-    await initializer.InitializeAsync();
+//    await initializer.InitializeAsync();
 
-    var ingestionService = scope.ServiceProvider
-    .GetRequiredService<IDocumentIngestionService>();
+//    var ingestionService = scope.ServiceProvider
+//    .GetRequiredService<IDocumentIngestionService>();
 
-    var filePath = Path.Combine(
-        app.Environment.ContentRootPath,
-        "RagDocuments",
-        "ticketing-rules.md");
+//    var filePath = Path.Combine(
+//        app.Environment.ContentRootPath,
+//        "RagDocuments",
+//        "ticketing-rules.md");
 
-    await ingestionService.IngestAsync(filePath);
+//    await ingestionService.IngestAsync(filePath);
 
-    var retriever = scope.ServiceProvider
-    .GetRequiredService<QdrantRagRetriever>();
+//    var retriever = scope.ServiceProvider
+//    .GetRequiredService<QdrantRagRetriever>();
 
-    var documents = await retriever.SearchAsync("JWT renewal failed", CancellationToken.None);
-}
+//    var documents = await retriever.SearchAsync("JWT renewal failed", CancellationToken.None);
+//}
 
 if (app.Environment.IsDevelopment())
 {
@@ -163,6 +176,7 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors("AllowWasm");
+app.UseCors(AngularCorsPolicy);
 
 app.UseAuthentication();
 app.UseAuthorization();
