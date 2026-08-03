@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-list',
@@ -10,7 +11,9 @@ import { Ticket } from '../../models/ticket.model';
 })
 export class TicketList implements OnInit {
   protected readonly tickets = signal<Ticket[]>([]);
-  constructor(private readonly ticketService: TicketService) {
+  protected readonly isLoading = false;
+  constructor(private readonly ticketService: TicketService,
+    private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,5 +28,9 @@ export class TicketList implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  protected createTicket(): void {
+    this.router.navigate(['/tickets/create']);
   }
 }

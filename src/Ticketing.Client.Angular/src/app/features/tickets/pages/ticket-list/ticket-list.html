@@ -1,10 +1,33 @@
-<p>Nombre de tickets : {{ tickets().length }}</p>
+<h2>Liste des tickets</h2>
+<button [disabled]="isLoading" (click)="createTicket()">
+  Nouveau ticket
+</button>
+<table>
 
-@for (ticket of tickets(); track ticket.id) {
-<div>
-  <h3>{{ ticket.title }}</h3>
-  <p>Statut : {{ ticket.statut }}</p>
-  <p>Créé le : {{ ticket.createdAtUtc }}</p>
-  <hr>
-</div>
-}
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Statut</th>
+      <th>Créé le</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    @for (ticket of tickets(); track ticket.id) {
+
+    <tr>
+
+      <td>{{ ticket.title }}</td>
+
+      <td>{{ ticket.statut }}</td>
+
+      <td>{{ ticket.createdAtUtc | date}}</td>
+
+    </tr>
+
+    }
+
+  </tbody>
+
+</table>
